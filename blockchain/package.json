@@ -1,0 +1,21 @@
+{
+  "name": "landledger-chain",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.cjs --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy.cjs --network sepolia",
+    "bridge": "node bridge.cjs"
+  },
+  "dependencies": {
+    "dotenv": "16.6.1",
+    "ethers": "6.15.0"
+  },
+  "devDependencies": {
+    "hardhat": "2.26.5",
+    "@nomicfoundation/hardhat-ethers": "3.1.0",
+    "solc": "0.8.24"
+  }
+}

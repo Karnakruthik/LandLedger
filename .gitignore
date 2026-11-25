@@ -1,0 +1,12 @@
+node_modules/
+.env
+**/.env
+*.local
+**/target/
+**/dist/
+blockchain/cache/
+blockchain/artifacts/
+blockchain/deployments/
+.local/
+*.log
+/LandLedger-project.zip

@@ -1,0 +1,17 @@
+{
+  "name": "landledger",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "blockchain"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w frontend",
+    "build": "npm run build -w frontend",
+    "chain:test": "npm test -w blockchain",
+    "chain:node": "npm run node -w blockchain",
+    "chain:local": "npm run deploy:local -w blockchain",
+    "chain:sepolia": "npm run deploy:sepolia -w blockchain",
+    "bridge": "npm run bridge -w blockchain"
+  }
+}
