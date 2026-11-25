@@ -34,6 +34,18 @@ import { EventTable } from "./Public";
 function WalletCard() {
   const { user, setUser } = useSession(),
     action = useAction();
+  const [needsExtension, setNeedsExtension] = useState(false);
+  function connect() {
+    setNeedsExtension(false);
+    action.act(async () => {
+      try {
+        setUser(await (await import("./wallet")).linkWallet());
+      } catch (error) {
+        if (error.code === "METAMASK_UNAVAILABLE") setNeedsExtension(true);
+        throw error;
+      }
+    });
+  }
   return (
     <div className="paper wallet">
       <div className="row">
@@ -52,16 +64,18 @@ function WalletCard() {
         <button
           className="btn secondary"
           disabled={action.busy}
-          onClick={() =>
-            action.act(async () =>
-              setUser(await (await import("./wallet")).linkWallet()),
-            )
-          }
+          onClick={connect}
         >
-          Link MetaMask
+          {action.busy ? "Connecting…" : "Link MetaMask"}
         </button>
       )}
       <Feedback action={action} />
+      {needsExtension && (
+        <div className="wallet-help">
+          <p>Open <code>{window.location.origin}</code> in Chrome, Edge, Brave or Firefox on this computer. Sign in there, unlock MetaMask, then select <strong>Link MetaMask</strong> and approve the signature.</p>
+          <a className="textlink" href="https://metamask.com/download" target="_blank" rel="noreferrer">Get the MetaMask extension</a>
+        </div>
+      )}
     </div>
   );
 }

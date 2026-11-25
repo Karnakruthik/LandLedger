@@ -94,6 +94,7 @@ function App() {
     ["/transactions", "Transactions"],
     ["/about", "About"],
   ];
+  if (!user) links.push(["/signup", "Create account"]);
   return (
     <Session.Provider value={{ user, setUser, config, loading }}>
       <div className="utility">

@@ -14,7 +14,11 @@ To start or reopen the local stack from this project folder, run this command in
 
 The launcher reuses running services. After a local chain restart it provisions a separate MySQL database for the new deployment and preserves previous databases. It writes service logs in `.local`. For a new Windows checkout with MySQL installed, complete the install-and-build step below before running the launcher. Use `-MySqlHome` if MySQL Server is installed in a different directory.
 
-Open [the local portal](http://127.0.0.1:5173/) in a browser with MetaMask. Select **Sign in → Create an account** to register as a landowner or buyer. The local administrator email and generated password are in `.local/preview-secrets.json` on this machine. The application creates the admin account on first startup. Keep the entire `.local` folder private.
+Open [Create account](http://127.0.0.1:5173/signup) on the computer running the demo. Choose Landowner or Buyer and use a password of at least 10 characters. Account creation works before connecting a wallet.
+
+For wallet linking, open the portal in a desktop browser with the MetaMask extension enabled, then sign in with the same email. On the dashboard select **Link MetaMask**, select your wallet, and approve the signature. Linking is free and does not require a network switch. If the preview reports that MetaMask is unavailable, copy the portal address into the browser profile where your wallet is installed. [Official MetaMask download](https://metamask.com/download)
+
+The local administrator email and generated password are in `.local/preview-secrets.json` on this machine. The application creates the admin account on first startup. Keep the entire `.local` folder private.
 
 The prepared instance uses its own MySQL data directory on port 33307. The automated demonstration uses a separate database and contract. The registry overview starts empty until you register land. For a classroom run, use the [walkthrough](docs/demonstration.md) and [fictional deed](docs/demo-deed.pdf).
 

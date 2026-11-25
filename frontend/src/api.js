@@ -1,6 +1,7 @@
 export const tokenKey = "landledger.session";
 export async function api(path, { method = "GET", body, binary = false } = {}) {
-  const token = sessionStorage.getItem(tokenKey);
+  const authenticating = path === "/auth/signup" || path === "/auth/login";
+  const token = authenticating ? null : sessionStorage.getItem(tokenKey);
   const headers = token ? { Authorization: "Bearer " + token } : {};
   if (body && !(body instanceof FormData)) {
     headers["Content-Type"] = "application/json";
@@ -18,6 +19,10 @@ export async function api(path, { method = "GET", body, binary = false } = {}) {
       window.dispatchEvent(new Event("session-ended"));
     }
     const error = await res.json().catch(() => ({}));
+    if (res.status === 409 && path === "/auth/signup")
+      throw Error("This email is already registered. Sign in with your existing account.");
+    if (res.status === 409 && path === "/wallet/link")
+      throw Error("This wallet is linked to another LandLedger account. Select a different wallet in MetaMask.");
     throw Error(
       error.message ||
         (res.status >= 500
